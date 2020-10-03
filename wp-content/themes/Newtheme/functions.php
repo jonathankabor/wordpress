@@ -66,3 +66,8 @@
     add_filter('document_title_separator', 'newtheme_title_separator');
     add_filter('nav_menu_css_class', 'newtheme_menu_class');
     add_filter('nav_menu_link_attributes', 'newtheme_menu_link_class');
+    add_action('add_meta_boxes', 'newtheme_add_custom_box');
+    add_action('save_post', 'newtheme_save_sponso');
+
+    require_once ('metaboxes/sponso.php');
+    SponsoMetaBox::register();
