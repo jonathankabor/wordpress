@@ -7,7 +7,7 @@
         add_theme_support('menus');
         register_nav_menu('header','En tête du menu');
         register_nav_menu('footer','Pied de page');
-        add_image_size('card-header', 150, 150, true);
+        add_image_size('card-header', 225, 225, true);
         remove_image_size('medium');
         add_image_size('medium', 225, 225);
     }
@@ -61,6 +61,46 @@
         echo '</nav>';
     }
 
+    function newtheme_init(){
+        register_taxonomy('sport','post', [
+            'labels'=> [
+                'singular_name'=> 'Sport',
+                'plural_name'=> 'Sports',
+                'search_items'=> 'Rechercher des sports',
+                'all_items'=> 'Tous les sports',
+                'edit_item'=> 'Editer le sport',
+                'update_item'=> 'Mettre à jour le sport',
+                'add_new_item'=> 'Ajouter un nouveau sport',
+                'new_item_name'=> 'Ajouter un nouveau sport',
+                'menu_item'=> 'Sport',
+            ],
+            'show_in_rest'=> true,
+            'hierarchical'=> true,
+            'show_admin_column'=> true,
+        ]);
+    }
+
+    function newtheme1_init(){
+        register_taxonomy('mode','post', [
+            'labels'=> [
+                'singular_name'=> 'Mode',
+                'plural_name'=> 'Modes',
+                'search_items'=> 'Rechercher des Modes',
+                'all_items'=> 'Toutes les Modes',
+                'edit_item'=> 'Editer la mode',
+                'update_item'=> 'Mettre à jour la mode',
+                'add_new_item'=> 'Ajouter une nouvelle mode',
+                'new_item_name'=> 'Ajouter une nouvelle mode',
+                'menu_item'=> 'Mode',
+            ],
+            'show_in_rest'=> true,
+            'hierarchical'=> true,
+            'show_admin_column'=> true,
+        ]);
+    }
+
+    add_action('init', 'newtheme_init');
+    add_action('init', 'newtheme1_init');
     add_action('after_setup_theme', 'newtheme_supports');
     add_action('wp_enqueue_scripts', 'newtheme_register_assets');
     add_filter('document_title_separator', 'newtheme_title_separator');
