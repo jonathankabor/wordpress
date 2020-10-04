@@ -119,4 +119,6 @@
     add_action('save_post', 'newtheme_save_sponso');
 
     require_once ('metaboxes/sponso.php');
+    require_once ('options/agence.php');
     SponsoMetaBox::register();
+    AgenceMenuPage::register();
