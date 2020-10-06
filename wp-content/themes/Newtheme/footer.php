@@ -5,7 +5,9 @@
         'theme_location' => 'footer',
         'container' => false,
         'menu_class' => 'navbar-nav mr-auto'
-    ])
+    ]);
+    the_widget(YoutubeWidget::class, [ 'youtube' => '7bOptq-NPJQ']);
+
     ?>
 </footer>
 <div>

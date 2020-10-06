@@ -189,7 +189,10 @@
     }
 
 
+    require_once 'widgets/YoutubeWidget.php';
+
     function newtheme_register_widget(){
+        register_widget(YoutubeWidget::class);
         register_sidebar([
             'id'=> 'homepage',
             'name'=> 'Sidebar Accueil',
@@ -202,5 +205,4 @@
 
     add_action('pre_get_posts', 'newtheme_pre_get_posts');
     add_filter('query_vars', 'newtheme_query_vars');
-
     add_action('widgets_init', 'newtheme_register_widget');
