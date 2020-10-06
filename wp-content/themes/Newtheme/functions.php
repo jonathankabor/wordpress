@@ -189,6 +189,18 @@
     }
 
 
+    function newtheme_register_widget(){
+        register_sidebar([
+            'id'=> 'homepage',
+            'name'=> 'Sidebar Accueil',
+            'before_widget'=> '<div class="p-4 %2$s" id="%1$s">',
+            'after_widget'=> '</div>',
+            'before_title'=> '<h4 class="font-italic">',
+            'afrter_title'=> '</h4>'
+        ]);
+    }
 
     add_action('pre_get_posts', 'newtheme_pre_get_posts');
     add_filter('query_vars', 'newtheme_query_vars');
+
+    add_action('widgets_init', 'newtheme_register_widget');
