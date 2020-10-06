@@ -1,7 +1,7 @@
 <?php get_header() ?>
 
-    <?php $sports = get_terms(['taxonomy' => 'sport']);
-     $modes = get_terms(['taxonomy' => 'mode']);?>
+    <?php $sports = get_terms(['taxonomy' => 'sport']);?>
+     <?php $modes = get_terms(['taxonomy' => 'mode']);?>
 
     <ul class="nav nav-pills my-4">
         <?php foreach ($sports as $sport): ?>

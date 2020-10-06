@@ -206,3 +206,10 @@
     add_action('pre_get_posts', 'newtheme_pre_get_posts');
     add_filter('query_vars', 'newtheme_query_vars');
     add_action('widgets_init', 'newtheme_register_widget');
+    add_filter('comment_form_default_fields', function ($fields){
+        $fields['email'] = <<<HTML
+        <div class="form-group"><label for="Email"></label><input class="form-control" name="email" id="email" required></div>
+HTML;
+
+        return $fields;
+    });
