@@ -189,6 +189,27 @@
     }
 
 
+    require_once 'widgets/YoutubeWidget.php';
+
+    function newtheme_register_widget(){
+        register_widget(YoutubeWidget::class);
+        register_sidebar([
+            'id'=> 'homepage',
+            'name'=> 'Sidebar Accueil',
+            'before_widget'=> '<div class="p-4 %2$s" id="%1$s">',
+            'after_widget'=> '</div>',
+            'before_title'=> '<h4 class="font-italic">',
+            'afrter_title'=> '</h4>'
+        ]);
+    }
 
     add_action('pre_get_posts', 'newtheme_pre_get_posts');
     add_filter('query_vars', 'newtheme_query_vars');
+    add_action('widgets_init', 'newtheme_register_widget');
+    add_filter('comment_form_default_fields', function ($fields){
+        $fields['email'] = <<<HTML
+        <div class="form-group"><label for="Email"></label><input class="form-control" name="email" id="email" required></div>
+HTML;
+
+        return $fields;
+    });

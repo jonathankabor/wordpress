@@ -9,6 +9,12 @@
 
             <?php the_content();?>
 
+            <?php
+            if (comments_open() || get_comments_number()){
+                comments_template();
+            }
+            ?>
+            <!--
             <h2>Articles relatifs</h2>
             <div class="row">
             <?php
@@ -24,22 +30,25 @@
                      [
                         'taxonomy'=> 'sport',
                         'terms'=> $sports,
-                     ]
+                         ]
                      ],
                      'meta_query'=> [
                      [
                         'key'=> SponsoMetaBox::META_KEY,
                          'compare'=> 'EXISTS'
                      ]
-                    ]
+                    ],
+
                 ]);
+
+
                 while ($query->have_posts()): $query->the_post();
             ?>
                     <div class="col-sm-4">
                         <?php require('parts/post.php'); ?>
                     </div>
-        <?php endwhile; wp_reset_postdata(); ?>
-            </div>
+                <?php endwhile; wp_reset_postdata(); ?>
+            </div> -->
 
         <?php endwhile; endif; ?>
 
