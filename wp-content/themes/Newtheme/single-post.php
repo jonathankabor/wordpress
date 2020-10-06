@@ -14,7 +14,7 @@
                 comments_template();
             }
             ?>
-
+            <!--
             <h2>Articles relatifs</h2>
             <div class="row">
             <?php
@@ -48,7 +48,7 @@
                         <?php require('parts/post.php'); ?>
                     </div>
                 <?php endwhile; wp_reset_postdata(); ?>
-            </div>
+            </div> -->
 
         <?php endwhile; endif; ?>
 
