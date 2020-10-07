@@ -5,6 +5,7 @@
         add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
         add_theme_support('menus');
+        add_theme_support('html5');
         register_nav_menu('header','En tête du menu');
         register_nav_menu('footer','Pied de page');
         add_image_size('card-header', 225, 225, true);
@@ -213,3 +214,6 @@ HTML;
 
         return $fields;
     });
+
+    add_action('after_switch_theme', 'flush_rewrite_rules');
+    add_action('switch_theme', 'flush_rewrite_rules');
