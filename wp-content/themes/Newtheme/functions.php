@@ -1,10 +1,14 @@
     <?php
 
 
+    require_once ('options/apparence.php');
+
+
     function newtheme_supports (){
         add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
         add_theme_support('menus');
+        add_theme_support('html5');
         register_nav_menu('header','En tête du menu');
         register_nav_menu('footer','Pied de page');
         add_image_size('card-header', 225, 225, true);
@@ -16,8 +20,10 @@
         wp_register_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', []);
         wp_register_script('bootstrap','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', ['popper', 'jquery'], false, true);
         wp_register_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', [], false, true);
-        wp_deregister_script('jquery');
-        wp_register_script('jquery', 'https://code.jquery.com/jquery-3.2.1.slim.min.js', [], false, true);
+        if (!is_customize_preview()){
+            wp_deregister_script('jquery');
+            wp_register_script('jquery', 'https://code.jquery.com/jquery-3.2.1.slim.min.js', [], false, true);
+        }
         wp_enqueue_style('bootstrap');
         wp_enqueue_script('bootstrap');
     }
@@ -97,15 +103,7 @@
             'hierarchical'=> true,
             'show_admin_column'=> true,
         ]);
-        register_post_type('bien',[
-            'label'=> 'Bien',
-            'public'=> true,
-            'menu_position' => 3,
-            'menu_icon'=> 'dashicons-building',
-            'supports' => ['title', 'editor', 'thumbnail'],
-            'show_in_rest' => true,
-            'has_archive'=> true,
-        ]);
+
     }
 
     add_action('init', 'newtheme_init');
@@ -195,7 +193,7 @@
         register_widget(YoutubeWidget::class);
         register_sidebar([
             'id'=> 'homepage',
-            'name'=> 'Sidebar Accueil',
+            'name'=> __('Sidebar Accueil', 'newtheme'),
             'before_widget'=> '<div class="p-4 %2$s" id="%1$s">',
             'after_widget'=> '</div>',
             'before_title'=> '<h4 class="font-italic">',
@@ -213,3 +211,12 @@ HTML;
 
         return $fields;
     });
+
+    add_action('after_switch_theme', 'flush_rewrite_rules');
+    add_action('switch_theme', 'flush_rewrite_rules');
+
+    //https://developer.wordpress.org/apis/handbook/internationalization/
+    add_action('after_setup_theme', function () {
+        load_theme_textdomain('newtheme', get_template_directory() . '/languages');
+    });
+
